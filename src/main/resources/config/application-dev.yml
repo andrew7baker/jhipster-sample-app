@@ -17,19 +17,19 @@ logging:
   level:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
-    io.github.jhipster.sample: DEBUG
+    com.mycompany.myapp: DEBUG
 
 spring:
   profiles:
     active: dev
     include:
       - swagger
-      # Uncomment to activate TLS for the dev profile
-      #- tls
+    # Uncomment to activate TLS for the dev profile
+    #- tls
   devtools:
     restart:
       enabled: true
-      additional-exclude: .h2.server.properties
+      additional-exclude: static/**,.h2.server.properties
     livereload:
       enabled: false # we use Webpack dev server + BrowserSync for livereload
   jackson:
@@ -37,33 +37,25 @@ spring:
       indent-output: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/jhipsterSampleApplication?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
-    username: root
+    url: jdbc:h2:file:./target/h2db/db/jhipster;DB_CLOSE_DELAY=-1
+    username: jhipster
     password:
     hikari:
       poolName: Hikari
       auto-commit: false
-      data-source-properties:
-        cachePrepStmts: true
-        prepStmtCacheSize: 250
-        prepStmtCacheSqlLimit: 2048
-        useServerPrepStmts: true
+  h2:
+    console:
+      enabled: false
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
-    database: MYSQL
-    show-sql: false
+    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    database: H2
+    show-sql: true
     properties:
       hibernate.id.new_generator_mappings: true
       hibernate.connection.provider_disables_autocommit: true
-      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_second_level_cache: false
       hibernate.cache.use_query_cache: false
       hibernate.generate_statistics: false
-      # modify batch size as necessary
-      hibernate.jdbc.batch_size: 25
-      hibernate.order_inserts: true
-      hibernate.order_updates: true
-      hibernate.query.fail_on_pagination_over_collection_fetch: true
-      hibernate.query.in_clause_parameter_padding: true
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
     contexts: dev, faker
@@ -87,10 +79,6 @@ server:
 # ===================================================================
 
 jhipster:
-  cache: # Cache configuration
-    ehcache: # Ehcache configuration
-      time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
-      max-entries: 100 # Number of objects in each cache entry
   # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
   cors:
     allowed-origins: '*'
@@ -103,7 +91,7 @@ jhipster:
     authentication:
       jwt:
         # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-        base64-secret: bXktc2VjcmV0LWtleS13aGljaC1zaG91bGQtYmUtY2hhbmdlZC1pbi1wcm9kdWN0aW9uLWFuZC1iZS1iYXNlNjQtZW5jb2RlZAo=
+        base64-secret: ZDA5M2NlMTYyNzIyY2I5ZTMxOTg4YzY4NjY0MWE2NGQxMTI0ODg3MDJiYTIwNTg4Njk4MjM3ZDlhOGJmMmQyZDkzNWYyNWMxNjEyMmI0Y2FjNWNkOTU5ZGRmYzhhOTNkNTQ2MmY5ZjFiOGYwNzE4NTI0ZTE4ZmM3ZDdjMGYzYTA=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
