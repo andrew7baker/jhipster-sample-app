@@ -1,4 +1,4 @@
-entity BmtChangeCi {
+entity BmtChangCi {
 	name String,
     weekDay String,
     timeBegin Instant,
@@ -6,18 +6,18 @@ entity BmtChangeCi {
     owner String
 }
 
-entity BmtRecord {
+entity BmtPayRecord {
     payTime Instant,
     payPersonId String,
     payPersonName String,
-    payAmount Long    
+    payAmount Long
 }
 
 relationship OneToMany {
-	BmtChangeCi{bmtRecord} to BmtRecord		
+	BmtChangCi{bmtPayRecord} to BmtPayRecord
 }
 
-paginate BmtChangeCi,BmtRecord with pagination
+paginate BmtChangCi,BmtRecord with pagination
 
 // Set service options to all except few
 service all with serviceImpl
