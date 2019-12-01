@@ -17,7 +17,7 @@ relationship OneToMany {
 	BmtChangCi{bmtPayRecord} to BmtPayRecord
 }
 
-paginate BmtChangCi,BmtRecord with pagination
+paginate BmtChangCi,BmtPayRecord with pagination
 
 // Set service options to all except few
 service all with serviceImpl
