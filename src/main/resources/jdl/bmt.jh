@@ -1,0 +1,25 @@
+entity BmtChangeCi {
+	name String,
+    weekDay String,
+    timeBegin Instant,
+    timeEnd Instant,
+    owner String
+}
+
+entity BmtRecord {
+    payTime Instant,
+    payPersonId String,
+    payPersonName String,
+    payAmount Long    
+}
+
+relationship OneToMany {
+	BmtChangeCi{bmtRecord} to BmtRecord		
+}
+
+paginate BmtChangeCi,BmtRecord with pagination
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with mySuffix
