@@ -14,7 +14,7 @@ entity BmtPayRecord {
 }
 
 enum WeekDay {
-    FRENCH, ENGLISH, SPANISH
+    MON, TUES, WEB,THU,FRI,SAT,SUN
 }
 
 relationship OneToMany {
