@@ -1,6 +1,6 @@
 entity BmtChangCi {
 	name String,
-    weekDay Language,
+    weekDay String,
     timeBegin Instant,
     timeEnd Instant,
     owner String
@@ -14,9 +14,6 @@ entity BmtPayRecord {
 }
 
 
-enum Language {
-    FRENCH, ENGLISH, SPANISH
-}
 
 relationship OneToMany {
 	BmtChangCi{bmtPayRecord} to BmtPayRecord
