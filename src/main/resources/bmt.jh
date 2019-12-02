@@ -3,7 +3,8 @@ entity BmtChangCi {
     weekDay String,
     timeBegin Instant,
     timeEnd Instant,
-    owner String
+    owner String,
+    userId Long
 }
 
 entity BmtPayRecord {
@@ -17,6 +18,10 @@ entity BmtPayRecord {
 
 relationship OneToMany {
 	BmtChangCi{bmtPayRecord} to BmtPayRecord
+}
+
+relationship ManyToOne {
+	BmtChangCi{user} to User
 }
 
 paginate BmtChangCi,BmtPayRecord with pagination
